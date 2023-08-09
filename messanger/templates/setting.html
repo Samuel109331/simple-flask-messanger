@@ -1,0 +1,44 @@
+{% extends "profile.html" %} 
+{% block title %}
+Account settings
+{% endblock %} 
+{% block content %}
+<form action="/savechanges" id="edit-profile" method="POST">
+    <div class="input-container">
+        <label>Full name</label>
+        <input type="text" value="{{ userinfo[0] }}" name="full-name" readonly>
+        <button type="button" onclick="edit('full-name')"><i class="fa-sharp fa-solid fa-pen"></i></button>
+    </div>
+    <div class="input-container">
+        <label>Birth date</label>
+        <input type="date" value="{{ userinfo[2] }}" name="birth-date" >
+    </div>
+    <div class="input-container">
+        <label>Gender</label>
+        <input type="text" value="{{ userinfo[3] }}" name="gender" readonly>
+        <button type="button" onclick="edit('gender')"><i class="fa-sharp fa-solid fa-pen"></i></button>
+    </div>
+    <div class="input-container">
+        <label>Country </label>
+        <select name="country" disabled>
+            {% for i in countries %}
+                {% if  i  == userinfo[4]  %}
+                    <option value="{{ i }}" selected>{{ i }}</option>
+                {% else %}
+                    <option value="{{ i }}">{{ i }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <button type="button" onclick="edit('country')"><i class="fa-sharp fa-solid fa-pen"></i></button>
+    </div>
+    <div class="input-container">
+        <label>Profile picture</label>
+        <a href="/{{ userinfo[5] }}"><img src="/{{ userinfo[5] }}" width="50" height="50"></a>
+        <a href="/changedp"><i class="fa-sharp fa-solid fa-pen" style="color: black;"></i></a>
+    </div>
+    <div class="input-container">
+        <button type="submit">Save changes</button>
+        <button type="reset">Reset</button>
+    </div>
+</form>
+{% endblock %}
