@@ -10,7 +10,7 @@ def randomColor():
     return color
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 4 * 1024 * 1024
+
 api = Api(app)
 
 api.add_resource(apis.SentMessages,'/api/sents/<string:username>')
@@ -20,7 +20,7 @@ api.add_resource(apis.ReportBug,'/api/report')
 
 
 
-ALLOWED_EXTENSIONS = {'png'}
+
 app.secret_key = "SAMI@9644"
 
 @app.before_request
@@ -56,18 +56,15 @@ def regPage():
     birthdate = request.form.get("bd")
     gender = request.form.get("gender")
     countries = request.form.get("countries")
-    avatar = request.files['avatar']
     password = request.form.get("password")
     confirm = request.form.get("confirm")
     try:
-        if (request.content_length <= (4 * 1024 * 1024)) and (password == confirm):
-            avatar.save(f"static/avatars/{username}.png")
-            avatarpath = f"static/avatars/{username}.png"
-            db.createAccount(fullname,username,birthdate,gender,countries,avatarpath,password)
+        if (password == confirm):
+            db.createAccount(fullname,username,birthdate,gender,countries,password)
             return "<script>alert('Account created successfully!');window.location.href='/';</script>"
         else:
-            print(avatar)
-            return "<script>alert('Only upload png images and max size 4MB size!');window.location.href='/createacc';</script>"
+            flash("Password matching failed!")
+            return render_template("signup.html",messages = get_flashed_messages)
     except db.sqlite3.IntegrityError:
         return "<script>alert('The username you used is chosen please choose another');window.location.href='/createacc';</script>"
     except Exception as e:
