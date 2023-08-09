@@ -75,7 +75,7 @@ def createAccount(fullname,username,birthdate,gender,country,password):
         time2 =str(time).split(" ")[1].split(".")[0]
         ultimatetime = time1+" "+time2
         cur.execute("INSERT INTO users(fullname,username,birthdate,gender,country,password,session,createdon)\
-                    VALUES(%s,%s,%s,%s,%s,%s,%s,false,%s)",(fullname,username,birthdate,gender,country,password,ultimatetime))
+                    VALUES(%s,%s,%s,%s,%s,%s,false,%s)",(fullname,username,birthdate,gender,country,password,ultimatetime))
         conn.commit()
 
 def viewUserInfo(username):
