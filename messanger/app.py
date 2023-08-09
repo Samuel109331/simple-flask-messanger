@@ -110,7 +110,7 @@ def chattingPage():
     if loggedIn():
         with db. pymysql.connect(host="sql.freedb.tech",user="freedb_sami9644",password="Hma8#vCBBUD&!Y8",database="freedb_messangerpro_db") as conn:
             cur = conn.cursor()
-            cur.execute("SELECT * FROM users WHERE username <> ?",(session['user-info']['username'],))
+            cur.execute("SELECT * FROM users WHERE username <> %s",(session['user-info']['username'],))
             users = cur.fetchall()
         return render_template("chatting.html",users = users,randcolor = randomColor(),username = session['user-info']['username'])
     else:
@@ -164,7 +164,7 @@ def saveNewPass():
     if (old == pwdold) and (pwdnew == pwdrep):
         with db.pymysql.connect(host="sql.freedb.tech",user="freedb_sami9644",password="Hma8#vCBBUD&!Y8",database="freedb_messangerpro_db") as conn:
             cur = conn.cursor()
-            cur.execute("UPDATE users SET password = ?",(pwdnew,))
+            cur.execute("UPDATE users SET password = %s",(pwdnew,))
             userinfo = db.viewUserInfo(session['user-info']['username'])
         cookies = {
                 "Full-name": userinfo[0][0],
@@ -196,7 +196,7 @@ def saveChanges():
     userinfo = db.viewUserInfo(session['user-info']['username'])
     with db. pymysql.connect(host="sql.freedb.tech",user="freedb_sami9644",password="Hma8#vCBBUD&!Y8",database="freedb_messangerpro_db") as conn:
         cur = conn.cursor()
-        cur.execute("UPDATE users SET fullname = ?, birthdate = ?, gender = ?, country = ? WHERE username = ?",
+        cur.execute("UPDATE users SET fullname = %s, birthdate = %s, gender = %s, country = %s WHERE username = %s",
                     (fullname, bd, gender, country, session['user-info']['username']))
     cookies = {
         "Full-name": fullname,
