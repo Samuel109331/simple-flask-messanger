@@ -1,0 +1,59 @@
+{% extends 'home.html' %} 
+{% block title %}
+create account
+{% endblock %} 
+{% block content %} 
+<form action="/register" method="post" enctype="multipart/form-data">
+    <div class="input-container">
+        <label for="username">Full name </label>
+        <input type="text" name="full-name" placeholder="Enter your full name" required>
+    </div>
+    <div class="input-container">
+        <label for="username">User name </label>
+        <input type="text" name="user-name" placeholder="Choose your username" required>
+    </div>
+    <div class="input-container">
+        <label for="username">Birth date </label>
+        <input type="date" name="bd" required>
+    </div>
+    <div class="radio-container">
+        <label>Gender</label>
+        <br>
+        Male <input type="radio" name="gender" value="male" required>
+        <br>
+        Female <input type="radio" name="gender" value="male" required>
+    </div>
+    <div class="input-container">
+        <label for="username">Select your country </label>
+        <input list="country"  required>
+        <datalist id="country" >
+            {% for c in countries %} 
+                <option value="{{ c }}" name="countries">{{ c }}</option>
+            {% endfor %}
+        </datalist>
+    </div>
+    <div class="input-container">
+        <label for="username">Password </label>
+        <input type="password" name="password" placeholder="Enter your password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"  required>
+    </div>
+    <div class="input-container">
+        <label>Confirm password</label>
+        <input type="password" placeholder="Confirm password" name="confirm"  required>
+    </div>
+    <div class="input-container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <div class="input-container">
+        <button type="submit">Create account</button>
+    </div>
+    <div class="input-container">
+       Already have account! <a href="/">Log in here!</a>
+    </div>
+</form>
+{% endblock %}

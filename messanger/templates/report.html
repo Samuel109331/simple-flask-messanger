@@ -1,0 +1,29 @@
+{% extends "profile.html" %}
+{% block title %} 
+Report problem
+{% endblock %}
+{% block content %} 
+<form action="#" id="edit-profile">
+    <div class="input-container">
+        <textarea id="complain" cols="30" rows="10" placeholder="Write any bugs here!"></textarea>
+    </div>
+    <div id="star-container">
+        <p>How many stars will you give to this website?</p>
+        <div id="stars">
+        <img src="/static/logos/star.png" class="star" width="30" height="30" >
+        <img src="/static/logos/star.png" class="star" width="30" height="30" >
+        <img src="/static/logos/star.png" class="star" width="30" height="30" >
+        <img src="/static/logos/star.png" class="star" width="30" height="30" >
+        <img src="/static/logos/star.png" class="star" width="30" height="30" >
+        
+    </div>
+    <button onclick="uncheckAll()">Uncheck all stars</button>
+    <input type="hidden" value="{{ username }}" id="session">
+    </div>
+    <div class="input-container">
+        <button type="button" onclick="reportBug()">Report bug <i class="fa-solid fa-bug"></i></button>
+        <button type="reset">Reset</button>
+    </div>
+    
+</form>
+{% endblock %}

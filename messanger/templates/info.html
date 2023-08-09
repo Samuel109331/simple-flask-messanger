@@ -1,0 +1,19 @@
+{% extends "profile.html" %} 
+{% block title %}
+About {{ userinfo[1] }}
+{% endblock %} 
+{% block content %}
+<div id="profile-container">
+<img src="/{{ userinfo[5] }}" width="200" height="200" style="border-radius: 50%;">
+<ul id="user-info">
+
+<li>Full name {{ userinfo[0] }}</li>
+<li>User name {{ userinfo[1] }}</li>
+<li>Born in {{ userinfo[2] }}</li>
+<li>Gender {{ userinfo[3] }}</li>
+<li>From {{ userinfo[4] }}</li>
+<li>Your password {{ password }}</li>
+<li>Account created on {{ userinfo[8] }}</li>
+</ul>
+</div>
+{% endblock %}
