@@ -1,4 +1,0 @@
-flask
-flask-restful
-pymysql
-gunicorn
