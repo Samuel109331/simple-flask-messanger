@@ -77,7 +77,7 @@ def storeSession():
         password = request.form.get("password")
         userinfo = db.viewUserInfo(username)
         checkusername = userinfo[0][1]
-        checkpassword = userinfo[0][6]
+        checkpassword = userinfo[0][5]
         if password == checkpassword:
             cookies = {
                 "Full-name" : userinfo[0][0],
@@ -85,8 +85,7 @@ def storeSession():
                 "birthdate" : userinfo[0][2],
                 "gender" : userinfo[0][3],
                 "country" : userinfo[0][4],
-                "avatar" : userinfo[0][5],
-                "password" : userinfo[0][6]
+                "password" : userinfo[0][5]
             }
             session['user-info'] = cookies
             return redirect(f"/profile/{session['user-info']['username']}")
@@ -130,7 +129,7 @@ def chatWith(username):
 def accountInfo():
     if loggedIn():
         userinfo = db.viewUserInfo(session['user-info']['username'])
-        password = userinfo[0][6]
+        password = userinfo[0][5]
         hashtags = ""
         for i in range(len(password)):
             hashtags+="*"
@@ -173,7 +172,7 @@ def saveNewPass():
                 "birthdate": userinfo[0][2],
                 "gender": userinfo[0][3],
                 "country": userinfo[0][4],
-                "avatar": userinfo[0][5],
+    
                 "password": pwdnew
                 }
         session['user-info'] = cookies
@@ -205,8 +204,7 @@ def saveChanges():
         "birthdate": bd,
         "gender": gender,
         "country": country,
-        "avatar": userinfo[0][5],
-        "password": userinfo[0][6]
+        "password": userinfo[0][5]
     }
     session['user-info'] = cookies
     return "<script>alert('Changes saved successfully!');window.location.href='/';</script>"
@@ -232,4 +230,4 @@ def logOut():
     return redirect("/")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
