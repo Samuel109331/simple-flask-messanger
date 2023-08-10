@@ -155,7 +155,7 @@ def changepassword():
        return "<script>alert('No saved sessions found!');window.location.href='/';</script>"
 
 #save the new password
-@app.route("/savechanges",methods=["POST"])
+@app.route("/savenewpass",methods=["POST"])
 def saveNewPass():
     old = session['user-info']['password']
     pwdold = request.form.get("old")
