@@ -30,6 +30,6 @@ class ReportBug(Resource):
         stars = data['stars']
         with db.pymysql.connect(host="sql.freedb.tech",user="freedb_sami9644",password="Hma8#vCBBUD&!Y8",database="freedb_messangerpro_db") as conn:
             cur = conn.cursor()
-            cur.execute("INSERT INTO reviews(review,reviewedby,stars) VALUES (?,?,?) ",(review,username,stars))
+            cur.execute("INSERT INTO reviews(review,reviewedby,stars) VALUES (%s,%s,%s) ",(review,username,stars))
             conn.commit()
         return {"message" : "review sent successfully!"}
