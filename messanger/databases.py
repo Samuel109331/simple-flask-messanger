@@ -38,7 +38,7 @@ def sendMessages(sender,reciever,message):
 def inboxMessages(username):
     with pymysql.connect(host="sql.freedb.tech",user="freedb_sami9644",password="Hma8#vCBBUD&!Y8",database="freedb_messangerpro_db") as conn:
         cur = conn.cursor()
-        cur.execute("SELECT message FROM messages WHERE sentto = %s",(username,))
+        cur.execute("SELECT message FROM messages WHERE sentto = %s ORDER BY senton",(username,))
         messages = cur.fetchall()
     if len(messages) == 0:
         return messages
